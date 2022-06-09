@@ -7,17 +7,16 @@ namespace Calculator
     {
         static void Main(string[] args)
         {
-             OutputConsole();
-           
+             OutputConsole();           
         }
 
         static void OutputConsole()
         {
             string [] operations = {"+","-","*","/", "^","!" };
             var inputOperation = "";
-            var anser = "";
-           
+            var anser = "";           
             Console.WriteLine("Please, enter the desired operation from the list:");
+
             foreach (string operation in operations)
             {
                 Console.Write(operation + " ");
@@ -30,14 +29,13 @@ namespace Calculator
             {
                 if (inputOperation != "!")
                 {
-                    ConsoleInput(inputOperation); 
+                    InputConsole(inputOperation); 
                 }
                 else
                 { 
                     CalculateFactorial();
                 }
             }
-
             else { Console.WriteLine("Error!"); OutputConsole(); return; }
           
             do
@@ -47,14 +45,19 @@ namespace Calculator
                 anser = anser.ToUpper();
             }
             while (anser != "Y" && anser != "N");
-            if (anser == "Y") OutputConsole();
-            else Console.WriteLine("The job is done!");
 
+            if (anser == "Y")
+            {
+                OutputConsole();
+            }
+            else
+            { 
+                Console.WriteLine("The job is done!");
+            }
         }
 
-        static void ConsoleInput(string operation)
+        static void InputConsole(string operation)
         {
-
             var one = false;
             var two = false;
             var numberOne = new double();
@@ -65,49 +68,45 @@ namespace Calculator
             Console.WriteLine("NumberTwo: ");
             two = double.TryParse(Console.ReadLine(), out numberTwo);
 
-
             switch (operation)
-
             {
                 case "+":
                     {
                         if (one && two && !double.IsInfinity(result = numberOne + numberTwo))
-
-                            Console.WriteLine($"Rezult:{numberOne}+{numberTwo}={result}");
+                        {
+                            Console.WriteLine($"Rezult:{numberOne}+{numberTwo}={result}"); 
+                        }
                         else
                         {
                             Console.WriteLine("Error!");
-                            ConsoleInput(operation);
+                            InputConsole(operation);
                         }
-
                         break;
                     }
                 case "-":
                     {
                         if (one && two && !double.IsInfinity(result = numberOne - numberTwo))
-
-
+                        { 
                             Console.WriteLine($"Rezult:{numberOne}-{numberTwo}={result}");
+                        }
                         else
                         {
                             Console.WriteLine("Error!");
-                            ConsoleInput(operation);
+                            InputConsole(operation);
                         }
-
                         break;
                     }
                 case "*":
                     {
                         if (one && two && !double.IsInfinity(result = numberOne * numberTwo))
-
-
+                        {
                             Console.WriteLine($"Rezult:{numberOne}*{numberTwo}={result}");
+                        }
                         else
                         {
                             Console.WriteLine("Error!");
-                            ConsoleInput(operation);
+                            InputConsole(operation);
                         }
-
                         break;
                     }
                 case "/":
@@ -119,48 +118,50 @@ namespace Calculator
                         else
                         {
                             Console.WriteLine("Error!");
-                            ConsoleInput(operation);
+                            InputConsole(operation);
                         }
-
                         break;
                     }
                 case "^":
                     {
                         if (one && two && !double.IsInfinity(result = Math.Pow(numberOne, numberTwo)))
-
-
+                        { 
                             Console.WriteLine($"Rezult:{numberOne}^{numberTwo}={result}");
+                        }
                         else
                         {
                             Console.WriteLine("Error!");
-                            ConsoleInput(operation);
+                            InputConsole(operation);
                         }
-
                         break;
-                    }
-           
+                    }          
             }
 
         }
+
         static void CalculateFactorial()
         {
             var numberOnlyOne=new int();      
             Console.WriteLine("Number from 1 to 1000: ");
-            if (int.TryParse(Console.ReadLine(), out numberOnlyOne) && numberOnlyOne > 0 && numberOnlyOne <= 1000)
 
+            if (int.TryParse(Console.ReadLine(), out numberOnlyOne) && numberOnlyOne > 0 && numberOnlyOne <= 1000)
+            { 
                 Console.WriteLine($"Rezult: {numberOnlyOne}!={Factorial(numberOnlyOne)}");
+            }
             else
             {
                 Console.WriteLine("Error!");
                 CalculateFactorial();
             }
         }
-        static BigInteger Factorial(int numberOne)
-        {              
-            
-                if (numberOne == 1) return 1;
-                return numberOne * Factorial(numberOne - 1);                           
 
+        static BigInteger Factorial(int numberOne)
+        {
+            if (numberOne == 1)
+            { 
+                return 1;
+            }
+            return numberOne * Factorial(numberOne - 1);                        
         }
     }
 }
